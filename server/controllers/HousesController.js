@@ -43,5 +43,15 @@ export class HousesController extends BaseController {
         }
     }
 
+    async destroyHouseId(req, res, next) {
+        try {
+            const houseId = req.params.houseId
+            const house = await housesService.destroyHouseId(houseId)
+            return res.send(house)
+        } catch (error) {
+            next(error)
+        }
+    }
+
 
 }

@@ -19,6 +19,12 @@ class HousesService {
         return houses
     }
 
+    async destroyHouseId(houseId) {
+        const house = await this.getHouseId(houseId)
+        await house.remove()
+        return house
+    }
+
 
 
 
