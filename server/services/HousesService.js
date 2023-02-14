@@ -2,6 +2,15 @@ import { dbContext } from "../db/DbContext.js"
 import { BadRequest } from "../utils/Errors.js"
 
 class HousesService {
+    async updateHouse(houseId, houseData) {
+        const foundHouse = await this.getHouseId(houseId)
+
+        foundHouse.description = houseData.description || foundHouse.description
+        foundHouse.price = houseData.price || foundHouse.price
+
+        await foundHouse.save()
+        return foundHouse
+    }
     async getHouseId(houseId) {
         const house = await dbContext.Houses.findById(houseId)
         if (!house) {
